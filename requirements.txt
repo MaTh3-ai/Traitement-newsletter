@@ -1,0 +1,10 @@
+transformers
+torch
+sentencepiece
+pandas
+beautifulsoup4
+gspread
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+python-dateutil
