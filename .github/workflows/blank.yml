@@ -2,22 +2,28 @@ name: Traitement hebdomadaire
 
 on:
   schedule:
-    - cron: '0 6 * * 1'  # chaque lundi à 6 h UTC
-  workflow_dispatch: {}
+    - cron: '0 6 * * 1'  # chaque lundi à 6h UTC
+  workflow_dispatch:
 
 jobs:
   process_emails:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install pandas gspread google-auth
           pip install transformers torch bs4
+
       - name: Run processor
         env:
           IMAP_HOST: ${{ secrets.IMAP_HOST }}
